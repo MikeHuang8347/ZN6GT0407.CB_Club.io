@@ -18,56 +18,30 @@
             transform: rotate(0deg); /* 不再旋轉 */
         }
         .watermark_1 {
-            position: fixed;
-            top: 10px; /* 將水印顯示在右上角 */
-            right: 10px;
             font-size: 24px;
             font-family: 標楷體, KaiTi, serif;
             color: rgb(250, 10, 10); /* 水印顏色 */
-            z-index: 1000; /* 確保水印在最上層 */
-            transform: rotate(0deg); /* 不再旋轉 */
         }
         .watermark_2 {
-            position: fixed;
-            top: 45px; /* 將水印垂直居中 */
-            right: 10px; /* 與右邊保持一定的間距 */
-            transform: translate(0, -50%); /* 垂直居中的偏移量 */
             font-size: 24px;
             font-family: 標楷體, KaiTi, serif;
             color: rgb(250, 10, 10); /* 水印顏色 */
-            z-index: 1000; /* 確保水印在最上層 */
-            transform: rotate(0deg); /* 不再旋轉 */
         }
         .watermark_3 {
-            position: fixed;
-            top: 80px; /* 將水印垂直居中 */
-            right: 10px; /* 與右邊保持一定的間距 */
-            transform: translate(0, -50%); /* 垂直居中的偏移量 */
             font-size: 24px;
             font-family: 標楷體, KaiTi, serif;
             color: rgb(250, 10, 10); /* 水印顏色 */
-            z-index: 1000; /* 確保水印在最上層 */
-            transform: rotate(0deg); /* 不再旋轉 */
         }
         .watermark_4 {
-            position: fixed;
-            top: 120px; /* 將水印垂直居中 */
-            right: 10px; /* 與右邊保持一定的間距 */
-            transform: translate(0, -50%); /* 垂直居中的偏移量 */
             font-size: 24px;
             font-family: 標楷體, KaiTi, serif;
             color: rgb(250, 10, 10); /* 水印顏色 */
-            z-index: 1000; /* 確保水印在最上層 */
-            transform: rotate(0deg); /* 不再旋轉 */
         }
     </style>
 </head>
 <body>
     <!-- 水印1 -->
     <div class="watermark">By 黃m</div>
-
-    <!-- 訪問計數器 -->
-    <div class="watermark_1" id="visitCounter"></div>
     <script>
         // JavaScript 程式碼
         document.addEventListener('DOMContentLoaded', function () {
@@ -80,10 +54,6 @@
             document.getElementById('visitCounter').innerText = `一共有「${visitCount}」隻貓來過這裡`;
         });
     </script>
-    <!-- 用於顯示自訂輪胎週長查詢次數 -->
-    <div id="customTireCircumferenceCounter" class="watermark_2"></div>
-    <div id="customTireCircumferenceCounter1" class="watermark_3"></div>
-    <div id="customTireCircumferenceCounter2" class="watermark_4"></div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // 初始化自訂輪胎週長查詢次數
@@ -118,6 +88,8 @@
             });
         });
     </script>
+    <!-- 訪問計數器 -->
+    <div class="watermark_1" id="visitCounter"></div><br>
     <h2>機車時速計算器</h2>
     <form id="speedCalculator">
         <label for="frontGear">前齒輪齒數：</label>
@@ -142,10 +114,17 @@
         <label for="engineRpm">引擎轉速（轉/分）：</label>
         <input type="number" id="engineRpm" name="engineRpm" required min="0"><br><br>
 
-        <button type="button" id="calculateButton">計算時速</button>
+        <button type="button" id="calculateButton" onclick="calculateSpeed()">計算時速</button>
 
         <!-- 用於顯示計算結果 -->
-        <div id="speedResult"></div>
+        <div id="speedResult"></div><br>
+
+        <!-- 用於顯示自訂輪胎週長查詢次數 -->
+        <div id="customTireCircumferenceCounter" class="watermark_2"></div><br>
+        <br>
+        <div id="customTireCircumferenceCounter1" class="watermark_3"></div><br>
+        <br>
+        <div id="customTireCircumferenceCounter2" class="watermark_4"></div><br>
     </form>
     <h2>輪胎直徑計算器</h2>
     <form id="tireForm">
