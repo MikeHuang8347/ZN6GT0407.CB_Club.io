@@ -38,39 +38,9 @@
             color: rgb(250, 10, 10); /* 水印顏色 */
         }
     </style>
-<!-- Google Analytics 跟踪代碼 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8GYNRXKSLM"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'G-8GYNRXKSLM', {
-        'send_page_view': true,
-        'page_title': document.title, // 設置頁面標題
-        'page_location': window.location.href, // 設置頁面 URL
-        'page_path': window.location.pathname // 設置頁面路徑
-    });
-
-    // 設置回調函數來更新訪客數據
-    gtag('event', 'page_view', {
-        'send_to': 'G-8GYNRXKSLM',
-        'event_callback': function() {
-            // 增加延遲確保數據加載完畢
-            setTimeout(function() {
-                // 從 Google Analytics 中獲取訪客數據
-                var visitorCount = gtag('get', 'G-8GYNRXKSLM', 'metrics', 'totalUsers');
-                // 更新顯示
-                document.getElementById('visitorCount').innerText = '目前訪客數：' + visitorCount;
-            }, 2000); // 這裡的 2000 是 2 秒的延遲時間，可以根據需要調整
-        }
-    });
-</script>
 </head>
-    <body>
-        <!-- 顯示訪客數 -->
-        <div id="visitorCount">正在載入訪客數...</div>
-    </body>
+
 
     <!-- 水印1 -->
     <div class="watermark">By 黃m</div>
@@ -175,12 +145,10 @@
             const selectedValue = tireCircumferenceElement.value;
             if (selectedValue === "custom") {
                 tireCircumference = parseFloat(document.getElementById("customInput").value) / 1000; // 將自訂輪胎週長從毫米轉換為公尺
-                const customTireCircumferenceCount = parseInt(localStorage.getItem('customTireCircumferenceCount')) || 0;
-                localStorage.setItem('customTireCircumferenceCount', customTireCircumferenceCount + 1);
-                document.getElementById('customTireCircumferenceCounter').innerText = `CB150R/CB300R查詢次數：${customTireCircumferenceCount + 1}`;
             } else {
                 tireCircumference = parseFloat(selectedValue) / 1000; // 將輪胎週長從毫米轉換為公尺
             }
+
 
             const engineRpm = parseInt(document.getElementById("engineRpm").value) / 60; // 引擎轉速從每分鐘轉換為每秒
 
