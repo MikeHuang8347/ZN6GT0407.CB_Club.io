@@ -23,16 +23,16 @@
     <h2>機車時速計算器</h2>
     <form id="speedCalculator">
         <label for="frontGear">前齒輪齒數：</label>
-        <input type="number" id="frontGear" name="frontGear" required><br><br>
+        <input type="number" id="frontGear" name="frontGear" required min="0"><br><br>
 
         <label for="rearGear">後齒輪齒數：</label>
-        <input type="number" id="rearGear" name="rearGear" required><br><br>
+        <input type="number" id="rearGear" name="rearGear" required min="0"><br><br>
 
         <label for="tireCircumference">輪胎週長（毫米）：</label>
-        <input type="number" id="tireCircumference" name="tireCircumference" required><br><br>
+        <input type="number" id="tireCircumference" name="tireCircumference" required min="0"><br><br>
 
         <label for="engineRpm">引擎轉速（轉/分）：</label>
-        <input type="number" id="engineRpm" name="engineRpm" required><br><br>
+        <input type="number" id="engineRpm" name="engineRpm" required min="0"><br><br>
 
         <button type="button" onclick="calculateSpeed()">計算時速</button>
 
@@ -43,13 +43,13 @@
     <h2>輪胎直徑計算器</h2>
     <form id="tireForm">
         <label for="width">輪胎寬度（毫米）：</label>
-        <input type="number" id="width" name="width" required><br><br>
+        <input type="number" id="width" name="width" required min="0"><br><br>
 
         <label for="profile">輪胎截面比例（％）：</label>
-        <input type="number" id="profile" name="profile" required><br><br>
+        <input type="number" id="profile" name="profile" required min="0"><br><br>
 
         <label for="rim">輪圈尺寸（英寸）：</label>
-        <input type="number" id="rim" name="rim" required><br><br>
+        <input type="number" id="rim" name="rim" required min="0"><br><br>
 
         <button type="button" onclick="calculateDiameter()">計算</button>
 
