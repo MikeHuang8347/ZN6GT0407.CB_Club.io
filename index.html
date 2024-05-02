@@ -38,22 +38,39 @@
             color: rgb(250, 10, 10); /* 水印顏色 */
         }
     </style>
-</head>
-<body>
-    <!-- 水印1 -->
-    <div class="watermark">By 黃m</div>
+    <!-- Google Analytics 跟踪代碼 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8GYNRXKSLM"></script>
     <script>
-        // JavaScript 程式碼
-        document.addEventListener('DOMContentLoaded', function () {
-            // 訪問計數器初始化
-            let visitCount = localStorage.getItem('visitCount') || 0;
-            visitCount++;
-            localStorage.setItem('visitCount', visitCount);
-
-            // 更新訪問計數器顯示
-            document.getElementById('visitCounter').innerText = `一共有「${visitCount}」隻貓來過這裡`;
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-8GYNRXKSLM', {
+            'send_page_view': true
+        });
+    
+        // 設置回調函數來更新訪客數據
+        gtag('event', 'page_view', {
+            'send_to': 'G-8GYNRXKSLM',
+            'event_callback': function() {
+                // 增加延遲確保數據加載完畢
+                setTimeout(function() {
+                    // 獲取訪客數據
+                    var visitorCount = gtag('get', 'G-8GYNRXKSLM', 'metrics', 'totalUsers');
+                    // 更新顯示
+                    document.getElementById('visitorCount').innerText = '目前訪客數：' + visitorCount;
+                }, 2000); // 這裡的 2000 是 2 秒的延遲時間，可以根據需要調整
+            }
         });
     </script>
+</head>
+    <body>
+        <!-- 顯示訪客數 -->
+        <div id="visitorCount">正在載入訪客數...</div>
+    </body>
+    <!-- 水印1 -->
+    <div class="watermark">By 黃m</div>
+    <!--
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // 初始化自訂輪胎週長查詢次數
@@ -88,8 +105,8 @@
             });
         });
     </script>
-    <!-- 訪問計數器 -->
-    <div class="watermark_1" id="visitCounter"></div><br>
+    -->
+
     <h2>機車時速計算器</h2>
     <form id="speedCalculator">
         <label for="frontGear">前齒輪齒數：</label>
@@ -120,11 +137,11 @@
         <div id="speedResult"></div><br>
 
         <!-- 用於顯示自訂輪胎週長查詢次數 -->
-        <div id="customTireCircumferenceCounter" class="watermark_2"></div><br>
+        <!-- div id="customTireCircumferenceCounter" class="watermark_2"></div><br>
         <br>
         <div id="customTireCircumferenceCounter1" class="watermark_3"></div><br>
         <br>
-        <div id="customTireCircumferenceCounter2" class="watermark_4"></div><br>
+        <div id="customTireCircumferenceCounter2" class="watermark_4"></div><br>-->
     </form>
     <h2>輪胎直徑計算器</h2>
     <form id="tireForm">
