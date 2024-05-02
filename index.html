@@ -27,6 +27,39 @@
             z-index: 1000; /* 確保水印在最上層 */
             transform: rotate(0deg); /* 不再旋轉 */
         }
+        .watermark_2 {
+            position: fixed;
+            top: 45px; /* 將水印垂直居中 */
+            right: 10px; /* 與右邊保持一定的間距 */
+            transform: translate(0, -50%); /* 垂直居中的偏移量 */
+            font-size: 24px;
+            font-family: 標楷體, KaiTi, serif;
+            color: rgb(250, 10, 10); /* 水印顏色 */
+            z-index: 1000; /* 確保水印在最上層 */
+            transform: rotate(0deg); /* 不再旋轉 */
+        }
+        .watermark_3 {
+            position: fixed;
+            top: 80px; /* 將水印垂直居中 */
+            right: 10px; /* 與右邊保持一定的間距 */
+            transform: translate(0, -50%); /* 垂直居中的偏移量 */
+            font-size: 24px;
+            font-family: 標楷體, KaiTi, serif;
+            color: rgb(250, 10, 10); /* 水印顏色 */
+            z-index: 1000; /* 確保水印在最上層 */
+            transform: rotate(0deg); /* 不再旋轉 */
+        }
+        .watermark_4 {
+            position: fixed;
+            top: 120px; /* 將水印垂直居中 */
+            right: 10px; /* 與右邊保持一定的間距 */
+            transform: translate(0, -50%); /* 垂直居中的偏移量 */
+            font-size: 24px;
+            font-family: 標楷體, KaiTi, serif;
+            color: rgb(250, 10, 10); /* 水印顏色 */
+            z-index: 1000; /* 確保水印在最上層 */
+            transform: rotate(0deg); /* 不再旋轉 */
+        }
     </style>
 </head>
 <body>
@@ -47,7 +80,44 @@
             document.getElementById('visitCounter').innerText = `一共有「${visitCount}」隻貓來過這裡`;
         });
     </script>
-
+    <!-- 用於顯示自訂輪胎週長查詢次數 -->
+    <div id="customTireCircumferenceCounter" class="watermark_2"></div>
+    <div id="customTireCircumferenceCounter1" class="watermark_3"></div>
+    <div id="customTireCircumferenceCounter2" class="watermark_4"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 初始化自訂輪胎週長查詢次數
+            let CB150R_CB300R_Counter = parseInt(localStorage.getItem('CB150R_CB300R_Counter')) || 0;
+            let CB650R_CB1100RS_Counter = parseInt(localStorage.getItem('CB650R_CB1100RS_Counter')) || 0;
+            let CB1000R_Counter = parseInt(localStorage.getItem('CB1000R_Counter')) || 0;
+    
+            document.getElementById('customTireCircumferenceCounter').innerText = `CB150R/CB300R查詢次數 : ${CB150R_CB300R_Counter}`;
+            document.getElementById('customTireCircumferenceCounter1').innerText = `CB650R/CB1100RS查詢次數 : ${CB650R_CB1100RS_Counter}`;
+            document.getElementById('customTireCircumferenceCounter2').innerText = `CB1000R查詢次數 : ${CB1000R_Counter}`;
+    
+            // 監聽選擇輪胎週長的下拉選單
+            document.getElementById('calculateButton').addEventListener('click', function() {
+                const selectedValue = document.getElementById('tireCircumference').value;
+                switch (selectedValue) {
+                    case '611.80':
+                        CB150R_CB300R_Counter++;
+                        localStorage.setItem('CB150R_CB300R_Counter', CB150R_CB300R_Counter);
+                        document.getElementById('customTireCircumferenceCounter').innerText = `CB150R/CB300R查詢次數 : ${CB150R_CB300R_Counter}`;
+                        break;
+                    case '629.80':
+                        CB650R_CB1100RS_Counter++;
+                        localStorage.setItem('CB650R_CB1100RS_Counter', CB650R_CB1100RS_Counter);
+                        document.getElementById('customTireCircumferenceCounter1').innerText = `CB650R/CB1100RS查詢次數 : ${CB650R_CB1100RS_Counter}`;
+                        break;
+                    case '640.80':
+                        CB1000R_Counter++;
+                        localStorage.setItem('CB1000R_Counter', CB1000R_Counter);
+                        document.getElementById('customTireCircumferenceCounter2').innerText = `CB1000R查詢次數 : ${CB1000R_Counter}`;
+                        break;
+                }
+            });
+        });
+    </script>
     <h2>機車時速計算器</h2>
     <form id="speedCalculator">
         <label for="frontGear">前齒輪齒數：</label>
@@ -57,7 +127,7 @@
         <input type="number" id="rearGear" name="rearGear" required min="0"><br><br>
 
         <label for="tireCircumference">輪胎週長（毫米）：</label>
-        <select id="tireCircumference" name="tireCircumference">
+        <select id="tireCircumference" name="tireCircumference" required>
             <option value="611.80">CB150R/CB300R</option>
             <option value="629.80">CB650R/CB1100RS</option>
             <option value="640.80">CB1000R</option>
@@ -72,7 +142,7 @@
         <label for="engineRpm">引擎轉速（轉/分）：</label>
         <input type="number" id="engineRpm" name="engineRpm" required min="0"><br><br>
 
-        <button type="button" onclick="calculateSpeed()">計算時速</button>
+        <button type="button" id="calculateButton">計算時速</button>
 
         <!-- 用於顯示計算結果 -->
         <div id="speedResult"></div>
@@ -98,12 +168,16 @@
         function calculateSpeed() {
             const frontGear = parseInt(document.getElementById("frontGear").value);
             const rearGear = parseInt(document.getElementById("rearGear").value);
-            let tireCircumference = 0;
-
+            let tireCircumference = 0; // 將輪胎週長宣告為變數
+            const tireCircumferenceElement = document.getElementById("tireCircumference");
+            
             // 檢查使用者是否選擇了自訂輪胎週長
-            const selectedValue = document.getElementById("tireCircumference").value;
+            const selectedValue = tireCircumferenceElement.value;
             if (selectedValue === "custom") {
                 tireCircumference = parseFloat(document.getElementById("customInput").value) / 1000; // 將自訂輪胎週長從毫米轉換為公尺
+                const customTireCircumferenceCount = parseInt(localStorage.getItem('customTireCircumferenceCount')) || 0;
+                localStorage.setItem('customTireCircumferenceCount', customTireCircumferenceCount + 1);
+                document.getElementById('customTireCircumferenceCounter').innerText = `CB150R/CB300R查詢次數：${customTireCircumferenceCount + 1}`;
             } else {
                 tireCircumference = parseFloat(selectedValue) / 1000; // 將輪胎週長從毫米轉換為公尺
             }
@@ -131,7 +205,8 @@
                 customInput.style.display = "none";
             }
         });
-		function calculateDiameter() {
+
+        function calculateDiameter() {
             const width = parseFloat(document.getElementById("width").value);
             const profile = parseFloat(document.getElementById("profile").value);
             const rim = parseFloat(document.getElementById("rim").value);
@@ -142,8 +217,7 @@
                 return;
             }
 
-            const height = width * (profile / 100);
-            const diameter = (height * 2) + (rim * 25.4);
+            const diameter = (width * profile / 100) * 2 + rim * 25.4; // 將直徑從英寸轉換為毫米
 
             document.getElementById("diameterResult").innerHTML = `<p>輪胎直徑：${diameter.toFixed(2)} 毫米</p>`;
         }
