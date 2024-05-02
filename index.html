@@ -13,7 +13,7 @@
             right: 10px;
             font-size: 24px;
             font-family: 標楷體, KaiTi, serif;
-            color: rgb(245, 9, 9); /* 水印顏色 */
+            color: rgb(0, 0, 255); /* 水印顏色 */
             z-index: 1000; /* 確保水印在最上層 */
             transform: rotate(0deg); /* 不再旋轉 */
         }
@@ -68,6 +68,12 @@
             const tireCircumference = parseFloat(document.getElementById("tireCircumference").value) / 1000; // 輪胎週長從毫米轉換為公尺
             const engineRpm = parseInt(document.getElementById("engineRpm").value) / 60; // 引擎轉速從每分鐘轉換為每秒
 
+            // 檢查輸入值是否為負值或空值
+            if (frontGear <= 0 || rearGear <= 0 || tireCircumference <= 0 || engineRpm <= 0) {
+                alert("輸入值不得為負值或空值");
+                return;
+            }
+
             const gearRatio = frontGear / rearGear;
             const speed = (gearRatio * tireCircumference * engineRpm) * 3.6; // 將速度從 m/s 轉換為 km/h
 
@@ -78,6 +84,12 @@
             const width = parseFloat(document.getElementById("width").value);
             const profile = parseFloat(document.getElementById("profile").value);
             const rim = parseFloat(document.getElementById("rim").value);
+
+            // 檢查輸入值是否為負值或空值
+            if (width <= 0 || profile <= 0 || rim <= 0) {
+                alert("輸入值不得為負值或空值");
+                return;
+            }
 
             const height = width * (profile / 100);
             const diameter = (height * 2) + (rim * 25.4);
