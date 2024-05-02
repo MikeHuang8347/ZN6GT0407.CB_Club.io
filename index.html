@@ -7,13 +7,23 @@
 
     <style>
         /* CSS 樣式 */
-        .watermark {
+       .watermark {
             position: fixed;
             bottom: 10px;
             right: 10px;
             font-size: 24px;
             font-family: 標楷體, KaiTi, serif;
             color: rgb(0, 0, 255); /* 水印顏色 */
+            z-index: 1000; /* 確保水印在最上層 */
+            transform: rotate(0deg); /* 不再旋轉 */
+        }
+        .watermark_1 {
+            position: fixed;
+            top: 10px; /* 將水印顯示在右上角 */
+            right: 10px;
+            font-size: 24px;
+            font-family: 標楷體, KaiTi, serif;
+            color: rgb(250, 10, 10); /* 水印顏色 */
             z-index: 1000; /* 確保水印在最上層 */
             transform: rotate(0deg); /* 不再旋轉 */
         }
@@ -56,7 +66,20 @@
         <!-- 用於顯示計算結果 -->
         <div id="diameterResult"></div>
     </form>
+    <!-- 訪問計數器 -->
+    <div class="watermark_1" id="visitCounter"></div>
+    <script>
+        // JavaScript 程式碼
+        document.addEventListener('DOMContentLoaded', function () {
+            // 訪問計數器初始化
+            let visitCount = localStorage.getItem('visitCount') || 0;
+            visitCount++;
+            localStorage.setItem('visitCount', visitCount);
 
+            // 更新訪問計數器顯示
+            document.getElementById('visitCounter').innerText = `一共有「${visitCount}」隻貓來過這裡`;
+        });
+    </script>
     <!-- 水印 -->
     <div class="watermark">By 黃m</div>
 
