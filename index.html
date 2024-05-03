@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>機車時速與輪胎直徑計算器</title>
 
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
-        /* CSS 樣式 */
+        /* 自訂 CSS 樣式 */
         .watermark {
             position: fixed;
             bottom: 10px;
@@ -17,131 +20,110 @@
             z-index: 1000; /* 確保水印在最上層 */
             transform: rotate(0deg); /* 不再旋轉 */
         }
-        .watermark_1 {
-            font-size: 24px;
-            font-family: 標楷體, KaiTi, serif;
-            color: rgb(250, 10, 10); /* 水印顏色 */
+        /* 設置圖片高度 */
+        .card-img-top {
+            height: 125px; /* 設置圖片高度 */
+            object-fit: cover; /* 設置圖片填充方式 */
         }
-        .watermark_2 {
-            font-size: 24px;
-            font-family: 標楷體, KaiTi, serif;
-            color: rgb(250, 10, 10); /* 水印顏色 */
+
+        /* 每個 Card 使用不同的底色 */
+        .card-color-1 {
+            background-color: #ffc107; /* 黃色 */
         }
-        .watermark_3 {
-            font-size: 24px;
-            font-family: 標楷體, KaiTi, serif;
-            color: rgb(250, 10, 10); /* 水印顏色 */
+
+        .card-color-2 {
+            background-color: #17a2b8; /* 深藍色 */
         }
-        .watermark_4 {
-            font-size: 24px;
-            font-family: 標楷體, KaiTi, serif;
-            color: rgb(250, 10, 10); /* 水印顏色 */
+
+        .card-color-3 {
+            background-color: #28a745; /* 綠色 */
+        }
+
+        .card-color-4 {
+            background-color: #dc3545; /* 紅色 */
+        }
+
+        .card-color-5 {
+            background-color: #6c757d; /* 灰色 */
         }
     </style>
 
 </head>
-
-
+<body class="container">
     <!-- 水印1 -->
     <div class="watermark">By 黃m</div>
-    <!--
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // 初始化自訂輪胎週長查詢次數
-            let CB150R_CB300R_Counter = parseInt(localStorage.getItem('CB150R_CB300R_Counter')) || 0;
-            let CB650R_CB1100RS_Counter = parseInt(localStorage.getItem('CB650R_CB1100RS_Counter')) || 0;
-            let CB1000R_Counter = parseInt(localStorage.getItem('CB1000R_Counter')) || 0;
-    
-            document.getElementById('customTireCircumferenceCounter').innerText = `CB150R/CB300R查詢次數 : ${CB150R_CB300R_Counter}`;
-            document.getElementById('customTireCircumferenceCounter1').innerText = `CB650R/CB1100RS查詢次數 : ${CB650R_CB1100RS_Counter}`;
-            document.getElementById('customTireCircumferenceCounter2').innerText = `CB1000R查詢次數 : ${CB1000R_Counter}`;
-    
-            // 監聽選擇輪胎週長的下拉選單
-            document.getElementById('calculateButton').addEventListener('click', function() {
-                const selectedValue = document.getElementById('tireCircumference').value;
-                switch (selectedValue) {
-                    case '611.80':
-                        CB150R_CB300R_Counter++;
-                        localStorage.setItem('CB150R_CB300R_Counter', CB150R_CB300R_Counter);
-                        document.getElementById('customTireCircumferenceCounter').innerText = `CB150R/CB300R查詢次數 : ${CB150R_CB300R_Counter}`;
-                        break;
-                    case '629.80':
-                        CB650R_CB1100RS_Counter++;
-                        localStorage.setItem('CB650R_CB1100RS_Counter', CB650R_CB1100RS_Counter);
-                        document.getElementById('customTireCircumferenceCounter1').innerText = `CB650R/CB1100RS查詢次數 : ${CB650R_CB1100RS_Counter}`;
-                        break;
-                    case '640.80':
-                        CB1000R_Counter++;
-                        localStorage.setItem('CB1000R_Counter', CB1000R_Counter);
-                        document.getElementById('customTireCircumferenceCounter2').innerText = `CB1000R查詢次數 : ${CB1000R_Counter}`;
-                        break;
-                }
-            });
-        });
-    </script>
-    -->
 
     <h2>機車時速計算器</h2>
     <form id="speedCalculator">
-        <label for="frontGear">前齒輪齒數：</label>
-        <input type="number" id="frontGear" name="frontGear" required min="0"><br><br>
-
-        <label for="rearGear">後齒輪齒數：</label>
-        <input type="number" id="rearGear" name="rearGear" required min="0"><br><br>
-
-        <label for="tireCircumference">輪胎週長（毫米）：</label>
-        <select id="tireCircumference" name="tireCircumference" required>
-            <option value="611.80">CB150R/CB300R</option>
-            <option value="629.80">CB650R/CB1100RS</option>
-            <option value="640.80">CB1000R</option>
-            <option value="custom">自訂</option>
-        </select><br><br>
-
-        <div id="customTireCircumference" style="display: none;">
-            <label for="customInput">自訂輪胎週長（毫米）：</label>
-            <input type="number" id="customInput" name="customInput" min="0"><br><br>
+        <div class="form-group">
+            <label for="frontGear">前齒輪齒數：</label>
+            <input type="number" id="frontGear" name="frontGear" class="form-control" required min="0">
         </div>
 
-        <label for="engineRpm">引擎轉速（轉/分）：</label>
-        <input type="number" id="engineRpm" name="engineRpm" required min="0"><br><br>
+        <div class="form-group">
+            <label for="rearGear">後齒輪齒數：</label>
+            <input type="number" id="rearGear" name="rearGear" class="form-control" required min="0">
+        </div>
 
-        <button type="button" id="calculateButton" onclick="calculateSpeed()">計算時速</button>
+        <div class="form-group">
+            <label for="tireCircumference">輪胎週長（毫米）：</label>
+            <select id="tireCircumference" name="tireCircumference" class="form-control" required>
+                <option value="611.80">CB150R/CB300R</option>
+                <option value="629.80">CB650R/CB1100RS</option>
+                <option value="640.80">CB1000R</option>
+                <option value="custom">自訂</option>
+            </select>
+        </div>
+
+        <div id="customTireCircumference" style="display: none;" class="form-group">
+            <label for="customInput">自訂輪胎週長（毫米）：</label>
+            <input type="number" id="customInput" name="customInput" class="form-control" min="0">
+        </div>
+
+        <div class="form-group">
+            <label for="engineRpm">引擎轉速（轉/分）：</label>
+            <input type="number" id="engineRpm" name="engineRpm" class="form-control" required min="0">
+        </div>
+
+        <button type="button" id="calculateButton" class="btn btn-primary" onclick="calculateSpeed()">計算時速</button>
 
         <!-- 用於顯示計算結果 -->
-        <div id="speedResult"></div><br>
-
-        <!-- 用於顯示自訂輪胎週長查詢次數 -->
-        <!-- div id="customTireCircumferenceCounter" class="watermark_2"></div><br>
-        <br>
-        <div id="customTireCircumferenceCounter1" class="watermark_3"></div><br>
-        <br>
-        <div id="customTireCircumferenceCounter2" class="watermark_4"></div><br>-->
+        <div id="speedResult" class="mt-3"></div>
     </form>
-    <h2>輪胎直徑計算器</h2>
+
+    <h2 class="mt-5">輪胎直徑計算器</h2>
     <form id="tireForm">
-        <label for="width">輪胎寬度（毫米）：</label>
-        <input type="number" id="width" name="width" required min="0"><br><br>
+        <div class="form-group">
+            <label for="width">輪胎寬度（毫米）：</label>
+            <input type="number" id="width" name="width" class="form-control" required min="0">
+        </div>
 
-        <label for="profile">輪胎截面比例（％）：</label>
-        <input type="number" id="profile" name="profile" required min="0"><br><br>
+        <div class="form-group">
+            <label for="profile">輪胎截面比例（％）：</label>
+            <input type="number" id="profile" name="profile" class="form-control" required min="0">
+        </div>
 
-        <label for="rim">輪圈尺寸（英寸）：</label>
-        <input type="number" id="rim" name="rim" required min="0"><br><br>
+        <div class="form-group">
+            <label for="rim">輪圈尺寸（英寸）：</label>
+            <input type="number" id="rim" name="rim" class="form-control" required min="0">
+        </div>
 
-        <button type="button" onclick="calculateDiameter()">計算</button>
+        <button type="button" class="btn btn-primary" onclick="calculateDiameter()">計算</button>
 
         <!-- 用於顯示計算結果 -->
-        <div id="diameterResult"></div>
+        <div id="diameterResult" class="mt-3"></div>
     </form>
+
     <!-- JavaScript -->
     <script>
+        // JavaScript 程式碼
         function calculateSpeed() {
             const frontGear = parseInt(document.getElementById("frontGear").value);
             const rearGear = parseInt(document.getElementById("rearGear").value);
-            let tireCircumference = 0; // 將輪胎週長宣告為變數
+            let tireCircumference = 0; // 宣告輪胎週長變數
             const tireCircumferenceElement = document.getElementById("tireCircumference");
             
-            // 檢查使用者是否選擇了自訂輪胎週長
+            // 檢查是否選擇了自訂輪胎週長
             const selectedValue = tireCircumferenceElement.value;
             if (selectedValue === "custom") {
                 tireCircumference = parseFloat(document.getElementById("customInput").value) / 1000; // 將自訂輪胎週長從毫米轉換為公尺
@@ -149,8 +131,7 @@
                 tireCircumference = parseFloat(selectedValue) / 1000; // 將輪胎週長從毫米轉換為公尺
             }
 
-
-            const engineRpm = parseInt(document.getElementById("engineRpm").value) / 60; // 引擎轉速從每分鐘轉換為每秒
+            const engineRpm = parseInt(document.getElementById("engineRpm").value) / 60; // 將引擎轉速從每分鐘轉換為每秒
 
             // 檢查輸入值是否為負值或空值
             if (frontGear <= 0 || rearGear <= 0 || tireCircumference <= 0 || engineRpm <= 0) {
@@ -190,37 +171,54 @@
             document.getElementById("diameterResult").innerHTML = `<p>輪胎直徑：${diameter.toFixed(2)} 毫米</p>`;
         }
     </script>
-    <hr>
-
     <h2>供使用者參考的資料</h2>
-    <p>/CB150R<br>
-        前齒 : 15<br>
-        後齒 : 47<br>
-        後輪尺寸 : 150/60-17<br>
-        輪胎週長 : 611.80</p>
 
-    <p>/CB300R<br>
-        前齒 : 台本 14 ,水貨14<br>
-        後齒 : 台本 37 ,水貨36<br>
-        後輪尺寸：150/60-17<br>
-        輪胎週長 : 611.80</p>
+    <!-- Card Group -->
+    <div class="card-group mb-3">
+        <!-- CB150R 資料 -->
+        <div class="card card-color-1">
+            <img src="https://i.imgur.com/UvyOqmb.jpeg" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">CB150R</h5>
+                <p class="card-text">前齒 : 15<br>後齒 : 47<br>後輪尺寸 : 150/60-17<br>輪胎週長 : 611.80</p>
+            </div>
+        </div>
 
-    <p>/CB650R<br>
-        前齒 : 台本 15 ,水貨<br>
-        後齒 : 台本 42 ,水貨<br>
-        後輪尺寸：180/55-17<br>
-        輪胎週長 : 629.80</p>
+        <!-- CB300R 資料 -->
+        <div class="card card-color-2">
+            <img src="https://i.imgur.com/1sTBjqF.jpeg" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">CB300R</h5>
+                <p class="card-text">前齒 : 台本 14 ,水貨14<br>後齒 : 台本 37 ,水貨36<br>後輪尺寸：150/60-17<br>輪胎週長 : 611.80</p>
+            </div>
+        </div>
 
-    <p>/CB1000R<br>
-        前齒 : 台本 15 ,水貨 15<br>
-        後齒 : 台本 43 ,水貨 44<br>
-        後輪尺寸：190/55-17<br>
-        輪胎週長 : 640.80</p>
+        <!-- CB650R 資料 -->
+        <div class="card card-color-3">
+            <img src="https://i.imgur.com/cVNJzR5.png" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">CB650R</h5>
+                <p class="card-text">前齒 : 台本 15 ,水貨<br>後齒 : 台本 42 ,水貨<br>後輪尺寸：180/55-17<br>輪胎週長 : 629.80</p>
+            </div>
+        </div>
 
-    <p>/CB1100RS<br>
-        前齒 : 台本     ,水貨<br>
-        後齒 : 台本     ,水貨<br>
-        後輪尺寸：180/55-17<br>
-        輪胎週長 : 629.80</p>
+        <!-- CB1000R 資料 -->
+        <div class="card card-color-4">
+            <img src="https://i.imgur.com/3Gng2jO.jpeg" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">CB1000R</h5>
+                <p class="card-text">前齒 : 台本 15 ,水貨 15<br>後齒 : 台本 43 ,水貨 44<br>後輪尺寸：190/55-17<br>輪胎週長 : 640.80</p>
+            </div>
+        </div>
+
+        <!-- CB1100RS 資料 -->
+        <div class="card card-color-5">
+            <img src="https://i.imgur.com/cX3hK8e.jpeg" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">CB1100RS</h5>
+                <p class="card-text">前齒 : 台本     ,水貨<br>後齒 : 台本     ,水貨<br>後輪尺寸：180/55-17<br>輪胎週長 : 629.80</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
