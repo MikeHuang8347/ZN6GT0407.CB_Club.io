@@ -12,10 +12,11 @@
         /* 自訂 CSS 樣式 */
         body {        
             background-image: url('https://i.imgur.com/LDgEW4U.png');
-            background-size: cover;
+            background-size: 130%; /* 將背景圖片的大小縮小為原始大小的50% */
             background-repeat: no-repeat;
             opacity: 0.9; /* 調整透明度 */
         }
+
 
         .form-group, .mt-5 {
             background-color: rgba(255, 255, 255, 0.7); /* 添加半透明的白色背景 */
@@ -77,7 +78,7 @@
     <!-- 水印1 -->
     <div class="watermark">By 黃m</div>
 
-    <h2>機車時速計算器</h2>
+    <h2 class="mt-5">機車時速計算器</h2>
     <form id="speedCalculator">
         <div class="form-group">
             <label for="frontGear">前齒輪齒數：</label>
@@ -166,7 +167,7 @@
             const gearRatio = frontGear / rearGear;
             const speed = (gearRatio * tireCircumference * engineRpm) * 3.6; // 將速度從 m/s 轉換為 km/h
 
-            document.getElementById("speedResult").innerHTML = `<p class="speed-text card">時速：${speed.toFixed(2)} 公里/小時</p>`;
+            document.getElementById("speedResult").innerHTML = `<p class="mt-5">時速：${speed.toFixed(2)} 公里/小時</p>`;
         }
 
         // 切換自訂輪胎週長輸入欄位的可見性
@@ -192,10 +193,10 @@
 
             const diameter = (width * profile / 100) * 2 + rim * 25.4; // 將直徑從英寸轉換為毫米
 
-            document.getElementById("diameterResult").innerHTML = `<p>輪胎直徑：${diameter.toFixed(2)} 毫米</p>`;
+            document.getElementById("diameterResult").innerHTML = `<p class="mt-5">輪胎直徑：${diameter.toFixed(2)} 毫米</p>`;
         }
     </script>
-    <h2>供使用者參考的資料</h2>
+    <h2 class="mt-5">供使用者參考的資料</h2>
 
     <!-- Card Group -->
     <div class="card-group mb-3">
