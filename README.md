@@ -6,7 +6,7 @@
 
 點擊下面的鏈接訪問我的網站：
 
-[ZN6GT0407.CB_Club.io](https://zn6gt0407.github.io/ZN6GT0407.CB_Club.io/)
+[MikeHuang8347.CB_Club.io](https://MikeHuang8347.github.io/ZN6GT0407.CB_Club.io/)
 
 ## 網站功能
 
